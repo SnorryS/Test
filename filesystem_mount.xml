@@ -1,0 +1,86 @@
+<!--
+REPLACING RESOURCES IN THE BASE GAME:
+When loading a file, the "data/" suffix for each filename is replaced with the path for each active mod ("data_mod1/", "data_mod2/" etc.).
+The first one that's found is loaded. If not found in a mod, it will fallback to the "data/" folder.
+This means that a mod can replace any file existent in the base "data/" folder.
+If two mods replace the same file, they are considered to be in conflict and cannot be used at the same time.
+
+ADDING EXTRA RESOURCES:
+To avoid conflicts, two mods should add extra resources using this xml.
+The "filesystem_mount.xml" is the only file that's searched and loaded from all active mods.
+
+Any resource file definition can be merged on top of the existing ones.
+Example:
+	<SoundDefinitions>
+		<MountFile name="data/sounds/my_soundsdef.xml"> (make sure to use a different name for the existing xml, therefore avoiding conflicts)
+	</SoundDefinitions>
+
+-->
+
+<filesystem_mount>
+	<ObjectLibrary>
+		<!-- animation needs to be first, since others can reference it -->
+		<MountFile name="data/object_library/animations.xml"/>
+
+		<!-- attack types need to load before equipment -->
+		<MountFile name="data/object_library/firearm_attacktypes.xml"/>
+
+		<!-- equipment/abilities/doctrine need to load before humans -->
+		<MountFile name="data/object_library/equipment.xml"/>
+		<MountFile name="data/object_library/equipment_pistols.xml"/>
+		<MountFile name="data/object_library/equipment_rifles.xml"/>
+		<MountFile name="data/object_library/equipment_shotguns.xml"/>
+		<MountFile name="data/object_library/abilities.xml"/>
+		<MountFile name="data/object_library/innateAbilities.xml"/>
+		<MountFile name="data/object_library/doctrine_tree.xml"/>
+
+		<!-- for anything else the order does not matter (humans/entities/fx/sounds/etc.) -->
+		<MountFile name="data/object_library/humans_friendly.xml"/>
+		<MountFile name="data/object_library/humans_enemy.xml"/>
+		<MountFile name="data/object_library/entities_various.xml"/>
+		<MountFile name="data/object_library/smallparts.xml"/>
+		<MountFile name="data/object_library/fx.xml"/>
+		<MountFile name="data/object_library/decals.xml"/>
+		<MountFile name="data/object_library/sound_entities.xml"/>
+		<MountFile name="data/object_library/randomizer_spawnzones.xml"/>
+	</ObjectLibrary>
+
+	<Maps>
+		<MountFile name="data/object_library/levels_bundle.xml"/>
+	</Maps>
+
+	<RandomMaps>
+		<MountFile name="data/object_library/random_levels_bundle.xml"/>
+	</RandomMaps>
+
+	<Campaigns>
+		<MountFile name="data/campaigns/campaign1.xml"/>
+		<MountFile name="data/campaigns/campaign2.xml"/>
+		<MountFile name="data/campaigns/campaign3.xml"/>
+	</Campaigns>
+
+	<Sounds>
+		<MountFile name="data/object_library/sounds.xml"/>
+	</Sounds>
+
+	<GUI>
+		<MountFile name="data/gui/hud.xml"/>
+		<MountFile name="data/gui/game.xml"/>
+		<MountFile name="data/gui/deploy.xml"/>
+		<MountFile name="data/gui/mods.xml"/>
+		<MountFile name="data/gui/campaign.xml"/>
+		<MountFile name="data/gui/menus.xml"/>
+		<MountFile name="data/gui/replays.xml"/>
+		<MountFile name="data/gui/options.xml"/>
+		<MountFile name="data/gui/customization.xml"/>
+		<MountFile name="data/gui/doctrine_tree.xml"/>
+		<MountFile name="data/gui/editor.xml"/>
+		<MountFile name="data/gui/credits.xml"/>
+		<MountFile name="data/gui/loading.xml"/>
+		<MountFile name="data/gui/unlockables_popups.xml"/>
+	</GUI>
+
+	<Portraits>
+		<MountFile name="data/config/user_list.xml"/>
+	</Portraits>
+</filesystem_mount>
